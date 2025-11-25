@@ -8,6 +8,37 @@ export default function Features() {
         <li>Fast</li>
         <li>Reliable</li>
         <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+                <li>Fast</li>
+        <li>Reliable</li>
+        <li>Intuitive</li>
+        
       </ul>
     </section>
   );
