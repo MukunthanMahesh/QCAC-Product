@@ -22,6 +22,16 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Choose (black/white) logo based on scroll position
+  const logoSrc = isPastHero
+    ? '/Manora_Logo_Black.svg'
+    : '/Manora_Logo_White.svg';
+
+  // Scroll behaviour: fixed with background and border when past hero, absolute otherwise
+  const headerPositionClass = isPastHero
+    ? 'fixed bg-page/10 backdrop-blur border-b border-border-soft'
+    : 'absolute';
+
   // Smooth scroll to section
   const handleScroll = (id) => {
     const el = document.getElementById(id);
@@ -29,38 +39,33 @@ export default function Navbar() {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Choose (black/white) logo based on scroll position
-  const logoSrc = isPastHero
-    ? '/Manora_Logo_Black.svg'
-    : '/Manora_Logo_White.svg';
-
   return (
     <header
-      className={`fixed top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10 transition-colors duration-300 ${
-        isPastHero ? 'text-black' : 'text-white'
+      className={`${headerPositionClass} top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10 ${
+        isPastHero ? 'text-ink' : 'text-white'
       }`}
     >
       <div className="flex items-center">
         <img
           src={logoSrc}
           alt="Manora Logo"
-          className="h-8 w-auto"
+          className="h-4 w-auto"
         />
       </div>
-      <nav className="flex items-center gap-6 text-sm">
+      <nav className="flex items-center gap-6 text-sm font-bold">
         <button
           type="button"
           onClick={() => handleScroll('features')}
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-accent transition-colors"
         >
-          Features
+          FEATURES
         </button>
         <button
           type="button"
           onClick={() => handleScroll('reviews')}
-          className="hover:text-blue-600 transition-colors"
+          className="hover:text-accent transition-colors"
         >
-          Reviews
+          REVIEWS
         </button>
       </nav>
     </header>
