@@ -24,8 +24,8 @@ export default function Navbar() {
 
   // Choose (black/white) logo based on scroll position
   const logoSrc = isPastHero
-    ? '/Manora_Logo_Black.svg'
-    : '/Manora_Logo_White.svg';
+    ? '/brand/Manora_Logo_Black.svg'
+    : '/brand/Manora_Logo_White.svg';
 
   // Scroll behaviour: fixed with background and border when past hero, absolute otherwise
   const headerPositionClass = isPastHero
