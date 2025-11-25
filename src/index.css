@@ -6,6 +6,7 @@
   --color-hero: #05070a;                               /* dark hero background */
   --color-accent: #00f0ff;                             /* electric blue accent for primary CTA 'n highlights */
   --color-accent-soft: #d6f0f4;                        /* subtle accent background */
+  --color-accent-dark: #00b3b8;                        /* darker accent for hover states on light background */
   --color-ink: #0b1015;                                /* primary text color */
   --color-ink-soft: #4b5563;                           /* secondary text */
   --color-ink-softer: #9ca3af;                         /* tertiary text */

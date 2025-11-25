@@ -39,6 +39,11 @@ export default function Navbar() {
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  // Change nav link hover styles based on navbar position (darker on light bg, lighter on dark bg)
+  const navHoverAccent = isPastHero
+    ? 'hover:text-accent-dark'
+    : 'hover:text-accent';
+
   return (
     <header
       className={`${headerPositionClass} top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10 ${
@@ -56,14 +61,14 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => handleScroll('features')}
-          className="hover:text-accent transition-colors"
+          className={`${navHoverAccent} transition-colors`}
         >
           FEATURES
         </button>
         <button
           type="button"
           onClick={() => handleScroll('reviews')}
-          className="hover:text-accent transition-colors"
+          className={`${navHoverAccent} transition-colors`}
         >
           REVIEWS
         </button>
