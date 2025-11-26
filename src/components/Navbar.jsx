@@ -41,6 +41,11 @@ export default function Navbar() {
     ? 'fixed bg-page/10 backdrop-blur border-b border-border-soft'
     : 'absolute';
 
+  // Scroll to top when clicking the logo
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   // Smooth scroll to section
   const handleScroll = (id) => {
     const el = document.getElementById(id);
@@ -69,7 +74,10 @@ export default function Navbar() {
     <header
       className={`${baseClasses} ${colorClasses} ${transitionClasses} ${visibilityClasses}`}
     >
-      <div className="flex items-center">
+      <div
+        className="flex items-center cursor-pointer"
+        onClick={handleScrollToTop}
+      >
         <img
           src={logoSrc}
           alt="Manora Logo"
