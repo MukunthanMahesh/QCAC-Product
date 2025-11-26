@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HiShoppingCart, HiArrowDown } from 'react-icons/hi2';
 import Button from './ui/Button.jsx';
 
-export default function Hero() {
+// Hero Component with staged intro animations
+
+export default function Hero({ onIntroComplete }) {
+  const [stage, setStage] = useState(0);
+
+  // Handle staged animations on mount
+  useEffect(() => {
+    const timers = [
+      setTimeout(() => setStage(1), 150), // headline
+      setTimeout(() => setStage(2), 450), // body + video
+      setTimeout(() => setStage(3), 850), // CTA
+      setTimeout(() => {
+        setStage(4);
+        if (onIntroComplete) onIntroComplete();
+      }, 1300),
+    ];
+
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+  }, []);
+
   return (
     <section
       id="hero"
@@ -10,10 +31,18 @@ export default function Hero() {
     >
       <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-start md:items-stretch gap-10 flex-1">
         <div className="w-full md:w-2/5 text-center md:text-left flex flex-col justify-center">
-          <p className="text-sm uppercase tracking-[1em] text-ink-softer mb-4">
+          <p
+            className={`text-sm uppercase tracking-[1em] text-ink-softer mb-4 transition-all duration-500 ease-out transform ${
+              stage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+          >
             Nova Series
           </p>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-4 flex items-center gap-3">
+          <h1
+            className={`text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-4 flex items-center gap-3 transition-all duration-500 ease-out transform ${
+              stage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+          >
             <img
               src="/brand/Manora_Logo_White.svg"
               alt="Manora"
@@ -21,15 +50,29 @@ export default function Hero() {
             />
             <span>Nova&nbsp;X1</span>
           </h1>
-          <p className="text-lg text-ink-soft mb-6">
+          <p
+            className={`text-lg text-ink-soft mb-6 transition-all duration-500 ease-out transform ${
+              stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+          >
             Manora Nova X1 ignites next-level computing with agile performance, all-day mobility, and a refined design built to drive your ideas, projects, and entertainment the instant they emerge.
           </p>
-          <ul className="hidden md:block text-sm text-ink-softer space-y-1 mb-8">
+          <ul
+            className={`hidden md:block text-sm text-ink-softer space-y-1 mb-8 transition-all duration-500 ease-out transform ${
+              stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+          >
             <li>• Pixel‑perfect 8K photon‑emissive display</li>
             <li>• Fanless quantum‑phase cooling at full boost</li>
             <li>• On‑device AI studio for render, grade, and mix</li>
           </ul>
-          <div className="flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start">
+          <div
+            className={`flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start transition-all duration-500 ease-out transform ${
+              stage >= 3
+                ? 'opacity-100 translate-y-0'
+                : 'opacity-0 translate-y-3 pointer-events-none'
+            }`}
+          >
             <Button>
               <span className="flex items-center gap-2">
                 <HiShoppingCart className="h-4 w-4" />
@@ -52,7 +95,11 @@ export default function Hero() {
         </div>
 
         <div className="w-full md:w-3/5 flex items-end justify-center md:justify-end">
-          <div className="relative w-full h-[55vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+          <div
+            className={`relative w-full h-[55vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden transition-all duration-700 ease-out transform ${
+              stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-16'
+            }`}
+          >
             <video
               className="h-full w-full object-cover object-bottom"
               src="/media/Manora_Hero_Scene.webm"

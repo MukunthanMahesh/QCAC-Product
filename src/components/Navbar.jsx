@@ -4,6 +4,8 @@ import React, { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const [isPastHero, setIsPastHero] = useState(false);
+  const [introDone, setIntroDone] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   // Check if we've scrolled past the hero section    
   useEffect(() => {
@@ -22,12 +24,19 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Mark intro as done shortly after mount (used to animate navbar only once)
+  useEffect(() => {
+    setHasMounted(true);
+    const t = setTimeout(() => setIntroDone(true), 600);
+    return () => clearTimeout(t);
+  }, []);
+
   // Choose (black/white) logo based on scroll position
   const logoSrc = isPastHero
     ? '/brand/Manora_Logo_Black.svg'
     : '/brand/Manora_Logo_White.svg';
 
-  // Scroll behaviour: fixed with background and border when past hero, absolute otherwise
+  // Fix scroll behaviour with background and border when past hero, absolute otherwise
   const headerPositionClass = isPastHero
     ? 'fixed bg-page/10 backdrop-blur border-b border-border-soft'
     : 'absolute';
@@ -44,11 +53,21 @@ export default function Navbar() {
     ? 'hover:text-accent-dark'
     : 'hover:text-accent';
 
+  // Classes for intro animation and styling
+  const baseClasses = `${headerPositionClass} top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10`;
+  const colorClasses = isPastHero ? 'text-ink' : 'text-white';
+  const transitionClasses = introDone
+    ? ''
+    : 'transition-all duration-500 ease-out transform';
+  const visibilityClasses = introDone
+    ? ''
+    : hasMounted
+      ? 'opacity-100 translate-y-0'
+      : 'opacity-0 -translate-y-3';
+
   return (
     <header
-      className={`${headerPositionClass} top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10 ${
-        isPastHero ? 'text-ink' : 'text-white'
-      }`}
+      className={`${baseClasses} ${colorClasses} ${transitionClasses} ${visibilityClasses}`}
     >
       <div className="flex items-center">
         <img
