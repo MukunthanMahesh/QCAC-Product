@@ -15,13 +15,12 @@ export default function FeaturesPerformance() {
       <div className="mx-auto max-w-6xl w-full flex flex-col gap-10">
         <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-stretch">
           <div className="w-full md:w-1/2">
-            <div className="relative h-64 sm:h-80 md:h-[360px] rounded-3xl border border-border-soft/60 bg-gradient-to-br from-accent/20 via-surface/40 to-bg/80 overflow-hidden">
-              <div className="absolute inset-0 opacity-40 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.35),_transparent_55%),radial-gradient(circle_at_bottom,_rgba(255,255,255,0.15),_transparent_55%)]" />
-              <div className="relative h-full w-full flex items-center justify-center">
-                <div className="rounded-2xl border border-border-soft/50 bg-page/40 px-6 py-4 text-xs uppercase tracking-[0.25em] text-ink-softer">
-                  Nova&nbsp;X1 internal layout (concept)
-                </div>
-              </div>
+            <div className="relative h-64 sm:h-80 md:h-[360px] overflow-visible">
+              <img
+                src="/images/Manora_FeaturesPerformance_Scene.webp"
+                alt="Nova X1 performance"
+                className="absolute inset-y-0 right-0 h-full w-full object-contain translate-x-[-10%]"
+              />
             </div>
           </div>
 
