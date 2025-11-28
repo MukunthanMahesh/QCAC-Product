@@ -71,10 +71,10 @@ export default function FeaturesPerformance() {
               Nova X1 is a supercomputer made mini.
             </h2>
             <p className="text-ink-soft text-base sm:text-lg max-w-xl">
-              Absurd compute headroom, high-speed storage, and whisper-quiet cooling, all in 4.5L.
+              Massive compute headroom, high-speed storage, and whisper-quiet cooling, all in 4.5L.
             </p>
             <p className="text-ink-softer text-sm max-w-xl">
-              Comfortably render a 10,000-frame Blender animation, keep a maxed out Cyberpunk 2077 session smooth, and still have room left over to train your next ML model. Trust us, the numbers are wild.
+              Comfortably render a 10,000-frame Blender animation, keep a maxed out Cyberpunk 2077 session smooth, and still have room left over to train your next ML model. The numbers speak for themselves.
             </p>
             <ul
               className={`mt-3 space-y-2 text-sm text-ink-soft transition-all duration-500 ease-out transform ${
@@ -82,19 +82,19 @@ export default function FeaturesPerformance() {
               }`}
             >
               <li className="flex items-start gap-2">
-                <HiCpuChip className="mt-[2px] h-4 w-4 text-ink-soft" />
+                <HiCpuChip className="mt-0.5 h-4 w-4 text-ink-soft" />
                 <span>12‑core NovaLogic X1 SoC, 32‑core ray‑trace GPU</span>
               </li>
               <li className="flex items-start gap-2">
-                <HiServerStack className="mt-[2px] h-4 w-4 text-ink-soft" />
+                <HiServerStack className="mt-0.5 h-4 w-4 text-ink-soft" />
                 <span>Up to 128&nbsp;GB unified LPDDR6X & 1–8&nbsp;TB PCIe&nbsp;5.0 SSD</span>
               </li>
               <li className="flex items-start gap-2">
-                <HiComputerDesktop className="mt-[2px] h-4 w-4 text-ink-soft" />
+                <HiComputerDesktop className="mt-0.5 h-4 w-4 text-ink-soft" />
                 <span>16.3&quot; 8K 240&nbsp;Hz display w/ dedicated media engine</span>
               </li>
               <li className="flex items-start gap-2">
-                <HiBattery50 className="mt-[2px] h-4 w-4 text-ink-soft" />
+                <HiBattery50 className="mt-0.5 h-4 w-4 text-ink-soft" />
                 <span>Up to 18&nbsp;hours battery, fast charge, Wi‑Fi&nbsp;7</span>
               </li>
             </ul>
