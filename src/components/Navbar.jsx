@@ -87,7 +87,7 @@ export default function Navbar() {
       <nav className="flex items-center gap-6 text-sm font-bold">
         <button
           type="button"
-          onClick={() => handleScroll('features')}
+          onClick={() => handleScroll('features-performance')}
           className={`${navHoverAccent} transition-colors`}
         >
           FEATURES
