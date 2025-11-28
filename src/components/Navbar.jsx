@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const [isPastHero, setIsPastHero] = useState(false);
+  const [theme, setTheme] = useState('dark');
   const [introDone, setIntroDone] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
 
@@ -13,16 +14,40 @@ export default function Navbar() {
       const hero = document.getElementById('hero');
       if (!hero) {
         setIsPastHero(false);
-        return;
+      } else {
+        const rect = hero.getBoundingClientRect();
+        setIsPastHero(rect.bottom <= 0);
       }
-      const rect = hero.getBoundingClientRect();
-      setIsPastHero(rect.bottom <= 0);
+
+      // Determine section under the navbar to pick theme
+      const sections = [
+        { id: 'hero', theme: 'dark' },
+        { id: 'features-performance', theme: 'light' },
+        { id: 'features', theme: 'dark' },
+      ];
+
+      const probeY = 80; // roughly navbar height from top
+      let nextTheme = theme;
+
+      for (const section of sections) {
+        const el = document.getElementById(section.id);
+        if (!el) continue;
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= probeY && rect.bottom >= probeY) {
+          nextTheme = section.theme;
+          break;
+        }
+      }
+
+      if (nextTheme !== theme) {
+        setTheme(nextTheme);
+      }
     };
 
     handleScroll();
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [theme]);
 
   // Mark intro as done shortly after mount (used to animate navbar only once)
   useEffect(() => {
@@ -32,13 +57,16 @@ export default function Navbar() {
   }, []);
 
   // Choose (black/white) logo based on scroll position
-  const logoSrc = isPastHero
-    ? '/brand/Manora_Logo_Black.svg'
-    : '/brand/Manora_Logo_White.svg';
+  const isDark = theme === 'dark';
+  const logoSrc = isDark
+    ? '/brand/Manora_Logo_White.svg'
+    : '/brand/Manora_Logo_Black.svg';
 
   // Fix scroll behaviour with background and border when past hero, absolute otherwise
   const headerPositionClass = isPastHero
-    ? 'fixed bg-page/10 backdrop-blur border-b border-border-soft'
+    ? isDark
+      ? 'fixed bg-black/40 backdrop-blur'
+      : 'fixed bg-page/80 backdrop-blur border-b border-border-soft'
     : 'absolute';
 
   // Scroll to top when clicking the logo
@@ -54,13 +82,11 @@ export default function Navbar() {
   };
 
   // Change nav link hover styles based on navbar position (darker on light bg, lighter on dark bg)
-  const navHoverAccent = isPastHero
-    ? 'hover:text-accent-dark'
-    : 'hover:text-accent';
+  const navHoverAccent = isDark ? 'hover:text-accent' : 'hover:text-accent-dark';
 
   // Classes for intro animation and styling
   const baseClasses = `${headerPositionClass} top-0 left-0 w-full px-6 py-4 flex items-center justify-between z-10`;
-  const colorClasses = isPastHero ? 'text-ink' : 'text-white';
+  const colorClasses = isDark ? 'text-white' : 'text-ink';
   const transitionClasses = introDone
     ? ''
     : 'transition-all duration-500 ease-out transform';
