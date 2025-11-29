@@ -107,10 +107,7 @@ export default function Reviews() {
     >
       <div className="mx-auto max-w-6xl w-full flex flex-col gap-10">
         <div className="max-w-2xl">
-          <p className="text-xs uppercase tracking-[0.16em] text-ink-softer">
-            Reviews
-          </p>
-          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold text-ink">
+          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold text-accent-dark">
             Trusted by people who push their machines.
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ink-soft">
@@ -170,9 +167,6 @@ export default function Reviews() {
               onImageClick={handleOpenImage}
               maxBodyLength={MAX_REVIEW_BODY_LENGTH}
             />
-            <p className="mt-2 text-[11px] leading-snug text-ink-softer">
-              Your review is saved privately in this browser using localStorage. Clearing site data will remove it.
-            </p>
             {userReviews.length > 0 && (
               <div className="mt-3 space-y-2">
                 <p className="text-[11px] text-ink-softer">

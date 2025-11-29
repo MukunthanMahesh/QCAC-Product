@@ -142,9 +142,13 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           required
+          maxLength={80}
           className="w-full rounded-md border border-border-soft bg-white px-2 py-1.5 text-sm text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent"
           placeholder="Summarize your experience in a few words"
         />
+        <p className="text-[11px] text-ink-softer text-right">
+          {title.length}/80
+        </p>
       </div>
 
       {/* description field required */}
