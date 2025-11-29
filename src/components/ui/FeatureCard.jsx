@@ -13,8 +13,6 @@ export default function FeatureCard({
   const [phase, setPhase] = useState(isActive ? 'expanded' : 'collapsed');
 
   useEffect(() => {
-    // When this card becomes active, briefly enter an "expanding"
-    // phase so the height animation can play before we fully show text.
     if (isActive) {
       setPhase('expanding');
       const timer = setTimeout(() => setPhase('expanded'), 500);
@@ -28,16 +26,14 @@ export default function FeatureCard({
   const isExpanding = phase === 'expanding';
   const isExpanded = phase === 'expanded';
 
-  // Core shape + transition behaviour; width is always full,
-  // we only animate height / padding / border colors so it works well on mobile.
+  // Core shape + transition behaviour
   const baseClasses =
     'w-full rounded-2xl border text-left text-sm overflow-hidden transition-[height,padding,border-color,background-color] duration-300';
   const stateClasses = isExpanding || isExpanded
     ? 'border-accent bg-accent/12 backdrop-blur-sm px-4 py-3'
     : 'border-white/10 bg-white/5 hover:bg-white/10 px-3 py-2';
 
-  // Collapsed vs expanded card height; tuned so
-  // one line fits when collapsed and content (plus optional children) when open.
+  // Collapsed vs expanded card height; tuned so one line fits when collapsed and content (+ children for colors) when open.
   const collapsedHeight = 40;
   const expandedHeight = 164;
   const height = isExpanding || isExpanded ? expandedHeight : collapsedHeight;
@@ -71,7 +67,7 @@ export default function FeatureCard({
               <span className="font-semibold text-white">{label}.</span>{' '}
               {text && <span>{text}</span>}
             </p>
-            {/* Optional extra content such as color swatches */}
+            {/*  Extra content */}
             {children}
           </div>
         )}
