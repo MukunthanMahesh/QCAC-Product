@@ -191,8 +191,9 @@ export default function Features() {
         </div>
 
         {/* Right: activeFeature carousel */}
-        <div className="w-full md:w-3/5 flex items-center justify-center">
-          <div className="relative h-72 w-full max-w-xl overflow-hidden sm:h-80 md:h-[360px]">
+        <div className="w-full md:w-3/5 flex items-center justify-center group">
+          {/* Image itself is animated when features change + soft hover lift/scale animation */}
+          <div className="relative h-72 w-full max-w-xl overflow-hidden sm:h-80 md:h-[360px] transition-all duration-700 ease-out transform group-hover:-translate-y-2 group-hover:scale-[1.02]">
             {prevFeature && isAnimating && (
               <img
                 key={prevFeature.id}
