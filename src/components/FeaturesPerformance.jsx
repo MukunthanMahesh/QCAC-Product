@@ -41,7 +41,6 @@ export default function FeaturesPerformance() {
       },
       {
         // Trigger when roughly 25% of the section is visible,
-        // with a slightly reduced bottom margin so it feels responsive to scroll.
         threshold: 0.25,
         rootMargin: '0px 0px -15% 0px',
       },
@@ -60,17 +59,17 @@ export default function FeaturesPerformance() {
     >
       <div className="mx-auto max-w-6xl w-full flex flex-col gap-10">
         <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-stretch">
-          <div className="w-full md:w-1/2">
+          <div className="w-full md:w-1/2 group">
             <div
-              // Performance image slides/fades in first when stage >= 1.
-              className={`relative h-64 sm:h-80 md:h-[360px] overflow-visible transition-all duration-700 ease-out transform ${
+              // Performance image slides/fades in first when stage >= 1,
+              className={`relative h-64 sm:h-80 md:h-[360px] overflow-visible transition-all duration-700 ease-out transform group-hover:-translate-y-2 group-hover:scale-[1.02] ${
                 stage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
             >
               <img
                 src="/images/Manora_FeaturesPerformance_Scene.webp"
                 alt="Nova X1 performance"
-                className="absolute inset-y-0 right-0 h-full w-full object-contain md:translate-x-[-10%]"
+                className="absolute inset-y-0 right-0 h-full w-full object-contain md:translate-x-[-10%] transition-transform duration-700 ease-out group-hover:rotate-[-1.5deg]"
               />
             </div>
           </div>
