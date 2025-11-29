@@ -39,14 +39,14 @@ export default function Hero({ onIntroComplete }) {
             Nova Series
           </p>
           <h1
-            className={`text-4xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-4 flex items-center gap-3 transition-all duration-500 ease-out transform ${
+            className={`text-3xl sm:text-5xl lg:text-6xl font-semibold leading-tight mb-4 flex flex-wrap md:flex-nowrap items-center justify-center md:justify-start gap-2 sm:gap-3 transition-all duration-500 ease-out transform ${
               stage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
             }`}
           >
             <img
               src="/brand/Manora_Logo_White.svg"
               alt="Manora"
-              className="h-9 w-auto pr-1"
+              className="h-7 sm:h-9 w-auto pr-1"
             />
             <span>Nova&nbsp;X1</span>
           </h1>
