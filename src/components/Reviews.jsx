@@ -2,36 +2,10 @@ import React, { useEffect, useState } from 'react';
 import Button from './ui/Button.jsx';
 import ReviewCard from './ui/ReviewCard.jsx';
 import ReviewForm from './ui/ReviewForm.jsx';
-
-// static sample reviews
-const SAMPLE_REVIEWS = [
-  {
-    id: 'sample-1',
-    name: 'Aiden K.',
-    rating: 5,
-    title: 'Desktop‑level power in my backpack',
-    body: 'I replaced a full ATX tower with Nova X1 and have not missed it once. Renders, games, and ML workloads all feel instant.',
-    createdAt: '2025-01-15T10:00:00.000Z',
-  },
-  {
-    id: 'sample-2',
-    name: 'Mia L.',
-    rating: 4,
-    title: 'Stays quiet under real work',
-    body: 'The thermals are the real story. I can edit 8K footage for hours and the fans barely spin up.',
-    createdAt: '2025-01-03T14:30:00.000Z',
-  },
-  {
-    id: 'sample-3',
-    name: 'Jordan P.',
-    rating: 5,
-    title: 'My new daily driver',
-    body: 'Battery life, screen, and keyboard are all dialed in. It already replaced my work and personal machines.',
-    createdAt: '2024-12-20T09:15:00.000Z',
-  },
-];
+import { SAMPLE_REVIEWS } from '../data/reviewsSampleData.js';
 
 const STORAGE_KEY = 'nova-x1-user-reviews';
+const MAX_REVIEW_BODY_LENGTH = 800;
 
 export default function Reviews() {
   // user reviews stored in localStorage
@@ -95,24 +69,6 @@ export default function Reviews() {
       window.localStorage.removeItem(STORAGE_KEY);
     } catch {
       // ignore errors
-    }
-  };
-
-  // copy user reviews json to clipboard or console
-  const handleCopyJson = async () => {
-    const payload = JSON.stringify(userReviews, null, 2);
-    if (!payload || payload === '[]') return;
-
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(payload);
-      } else {
-        // eslint-disable-next-line no-console
-        console.log(payload);
-      }
-    } catch {
-      // eslint-disable-next-line no-console
-      console.log(payload);
     }
   };
 
@@ -207,7 +163,11 @@ export default function Reviews() {
             <h3 className="text-sm font-semibold text-ink mb-2">
               Add your review
             </h3>
-            <ReviewForm onSubmit={handleAddReview} onImageClick={handleOpenImage} />
+            <ReviewForm
+              onSubmit={handleAddReview}
+              onImageClick={handleOpenImage}
+              maxBodyLength={MAX_REVIEW_BODY_LENGTH}
+            />
             <p className="mt-2 text-[11px] leading-snug text-ink-softer">
               Your review is saved privately in this browser using localStorage. Clearing site data will remove it.
             </p>
@@ -217,14 +177,6 @@ export default function Reviews() {
                   Manage your local reviews
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Button
-                    type="button"
-                    variant="secondaryLight"
-                    className="px-3 py-1 text-[11px]"
-                    onClick={handleCopyJson}
-                  >
-                    Copy JSON
-                  </Button>
                   <Button
                     type="button"
                     variant="secondaryLight"

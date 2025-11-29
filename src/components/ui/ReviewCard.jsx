@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HiMagnifyingGlassPlus } from 'react-icons/hi2';
 import RatingStars from './RatingStars.jsx';
 
@@ -44,12 +44,22 @@ function formatReviewDate(value) {
 export default function ReviewCard({ review, onImageClick }) {
   if (!review) return null;
 
+  // local toggle for read more
+  const [isExpanded, setIsExpanded] = useState(false);
+
   // normalise single image or images[]
   const images = Array.isArray(review.images)
     ? review.images
     : review.imageDataUrl
       ? [review.imageDataUrl]
       : [];
+
+  const body = review.body || '';
+  const maxPreviewLength = 220;
+  const shouldClamp = body.length > maxPreviewLength;
+  const visibleBody = !shouldClamp || isExpanded
+    ? body
+    : `${body.slice(0, maxPreviewLength).trimEnd()}…`;
 
   return (
     <article className="rounded-xl border border-border-soft bg-white/70 p-4 shadow-sm backdrop-blur">
@@ -77,8 +87,17 @@ export default function ReviewCard({ review, onImageClick }) {
         </div>
       </div>
       <p className="mt-3 text-sm text-ink-soft">
-        {review.body}
+        {visibleBody}
       </p>
+      {shouldClamp && (
+        <button
+          type="button"
+          onClick={() => setIsExpanded((prev) => !prev)}
+          className="mt-1 text-xs font-medium text-accent-dark hover:underline"
+        >
+          {isExpanded ? 'Show less' : 'Read more'}
+        </button>
+      )}
       {images.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
           {images.map((src, index) => (

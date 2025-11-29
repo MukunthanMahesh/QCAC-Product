@@ -5,7 +5,8 @@ import Button from './Button.jsx';
 // controlled form for creating a new review
 // onSubmit passes cleaned payload up
 // onImageClick opens shared lightbox in parent
-export default function ReviewForm({ onSubmit, onImageClick }) {
+// maxBodyLength limits description characters
+export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
   // local form fields
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
@@ -159,9 +160,15 @@ export default function ReviewForm({ onSubmit, onImageClick }) {
           value={body}
           onChange={(event) => setBody(event.target.value)}
           required
+          maxLength={maxBodyLength || undefined}
           className="w-full min-h-[96px] rounded-md border border-border-soft bg-white px-2 py-1.5 text-sm text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none"
           placeholder="Tell us how Nova X1 handles your workloads, travel, and everything in between."
         />
+        {maxBodyLength && (
+          <p className="text-[11px] text-ink-softer text-right">
+            {body.length}/{maxBodyLength}
+          </p>
+        )}
       </div>
 
       {/* image attachment with hidden input and button */}
