@@ -24,6 +24,7 @@ export default function Navbar() {
         { id: 'hero', theme: 'dark' },
         { id: 'features-performance', theme: 'light' },
         { id: 'features', theme: 'dark' },
+        { id: 'reviews', theme: 'light' },
       ];
 
       const probeY = 80; // roughly navbar height from top
