@@ -5,7 +5,7 @@ import ReviewForm from './ui/ReviewForm.jsx';
 import { SAMPLE_REVIEWS } from '../data/reviewsSampleData.js';
 
 const STORAGE_KEY = 'nova-x1-user-reviews';
-const MAX_REVIEW_BODY_LENGTH = 800;
+const MAX_REVIEW_BODY_LENGTH = 1_000;
 
 export default function Reviews() {
   // user reviews stored in localStorage
@@ -42,6 +42,8 @@ export default function Reviews() {
   const handleAddReview = ({ name, title, rating, body, images = [], imageDataUrl }) => {
     const createdAt = new Date().toISOString();
 
+    const safeName = name && name.trim() ? name.trim() : 'Anonymous User';
+
     // normalise images array or single image
     const normalisedImages = Array.isArray(images)
       ? images
@@ -51,7 +53,7 @@ export default function Reviews() {
 
     const nextReview = {
       id: `user-${Date.now()}`,
-      name,
+      name: safeName,
       rating: Number(rating) || 5,
       title: title || 'Review',
       body,

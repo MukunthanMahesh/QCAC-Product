@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { HiMagnifyingGlassPlus } from 'react-icons/hi2';
 import RatingStars from './RatingStars.jsx';
 
-// format iso date into "november 2nd, 2025"
+// format iso date into e.g. "november 2nd, 2025"
 function formatReviewDate(value) {
   if (!value) return '';
   const date = new Date(value);
@@ -55,7 +55,7 @@ export default function ReviewCard({ review, onImageClick }) {
       : [];
 
   const body = review.body || '';
-  const maxPreviewLength = 220;
+  const maxPreviewLength = 300;
   const shouldClamp = body.length > maxPreviewLength;
   const visibleBody = !shouldClamp || isExpanded
     ? body

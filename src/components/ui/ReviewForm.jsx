@@ -54,8 +54,8 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
     const trimmedTitle = title.trim();
     const trimmedBody = body.trim();
 
-    // name and description required
-    if (!trimmedName || !trimmedBody) return;
+    // title and description required
+    if (!trimmedTitle || !trimmedBody) return;
 
     if (onSubmit) {
       onSubmit({
@@ -82,22 +82,21 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
 
   return (
     <form className="space-y-3" onSubmit={handleSubmit}>
-      {/* name field required */}
+      {/* optional name field, defaults to anonymous */}
       <div className="space-y-1">
         <label
           htmlFor="review-name"
           className="block text-xs font-medium text-ink-softer uppercase tracking-[0.16em]"
         >
-          Name
+          Name (Optional)
         </label>
         <input
           id="review-name"
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          required
           className="w-full rounded-md border border-border-soft bg-white px-2 py-1.5 text-sm text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent"
-          placeholder="How should we refer to you?"
+          placeholder="Anonymous User"
         />
       </div>
 
@@ -135,15 +134,16 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
           htmlFor="review-title"
           className="block text-xs font-medium text-ink-softer uppercase tracking-[0.16em]"
         >
-          Review title
+          Review title <span className="text-red-500">*</span>
         </label>
         <input
           id="review-title"
           type="text"
           value={title}
           onChange={(event) => setTitle(event.target.value)}
+          required
           className="w-full rounded-md border border-border-soft bg-white px-2 py-1.5 text-sm text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent"
-          placeholder="Desktop-level power, finally portable"
+          placeholder="Summarize your experience in a few words"
         />
       </div>
 
@@ -153,7 +153,7 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
           htmlFor="review-body"
           className="block text-xs font-medium text-ink-softer uppercase tracking-[0.16em]"
         >
-          Your experience
+          Your experience <span className="text-red-500">*</span>
         </label>
         <textarea
           id="review-body"
@@ -162,7 +162,7 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
           required
           maxLength={maxBodyLength || undefined}
           className="w-full min-h-[96px] rounded-md border border-border-soft bg-white px-2 py-1.5 text-sm text-ink outline-none focus:border-accent focus:ring-1 focus:ring-accent resize-none"
-          placeholder="Tell us how Nova X1 handles your workloads, travel, and everything in between."
+          placeholder="Tell us about your experience with the Nova X1..."
         />
         {maxBodyLength && (
           <p className="text-[11px] text-ink-softer text-right">
