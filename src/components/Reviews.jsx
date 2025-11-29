@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from './ui/Button.jsx';
 import ReviewCard from './ui/ReviewCard.jsx';
 import ReviewForm from './ui/ReviewForm.jsx';
@@ -14,6 +14,9 @@ export default function Reviews() {
   const [sortMode, setSortMode] = useState('newest');
   // image currently shown in lightbox
   const [lightboxImage, setLightboxImage] = useState(null);
+  // track when section enters viewport
+  const sectionRef = useRef(null);
+  const [hasEntered, setHasEntered] = useState(false);
 
   // load saved user reviews on mount
   useEffect(() => {
@@ -37,6 +40,31 @@ export default function Reviews() {
       // If localStorage is unavailable or quota exceeded, fail silently
     }
   }, [userReviews]);
+
+  // fade and slide content in when reviews section enters viewport
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node || hasEntered) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setHasEntered(true);
+            observer.disconnect();
+          }
+        });
+      },
+      {
+        threshold: 0.25,
+        rootMargin: '0px 0px -15% 0px',
+      },
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, [hasEntered]);
 
   // build persisted review object from form payload
   const handleAddReview = ({ name, title, rating, body, images = [], imageDataUrl }) => {
@@ -103,21 +131,32 @@ export default function Reviews() {
   return (
     <section
       id="reviews"
+      ref={sectionRef}
       className="px-6 py-20 bg-page text-ink min-h-screen flex items-center"
     >
       <div className="mx-auto max-w-6xl w-full flex flex-col gap-10">
-        <div className="max-w-2xl">
+        <div
+          className={`max-w-2xl transition-all duration-500 ease-out transform ${
+            hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+          }`}
+          style={{ transitionDelay: hasEntered ? '0ms' : '0ms' }}
+        >
           <h2 className="text-3xl sm:text-4xl font-semibold text-accent-dark">
             Trusted by people who push their machines.
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-ink-soft">
+          <p className="mt-3 text-base sm:text-lg text-ink-soft">
             Read what early Nova X1 owners are saying, then share how it holds up in your own workflow. From developers to creators to everyday users, the feedback is consistent. the Nova X1 handles tough tasks easily and makes their old setups feel outdated.
           </p>
         </div>
 
         <div className="grid gap-8 md:grid-cols-[2fr,1fr] items-start">
           <div className="space-y-4">
-            <div className="flex items-center justify-between">
+            <div
+              className={`flex items-center justify-between transition-all duration-500 ease-out transform ${
+                hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+              }`}
+              style={{ transitionDelay: hasEntered ? '120ms' : '0ms' }}
+            >
               <p className="text-xs text-ink-softer">
                 Showing {sortedReviews.length} review{sortedReviews.length === 1 ? '' : 's'}
               </p>
@@ -144,13 +183,23 @@ export default function Reviews() {
               </div>
             </div>
 
-            {sortedReviews.map((review) => (
-              <ReviewCard
+            {sortedReviews.map((review, index) => {
+              const cardDelay = 200 + index * 80;
+              return (
+              <div
                 key={review.id}
-                review={review}
-                onImageClick={handleOpenImage}
-              />
-            ))}
+                className={`transition-all duration-500 ease-out transform ${
+                  hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+                }`}
+                style={{ transitionDelay: hasEntered ? `${cardDelay}ms` : '0ms' }}
+              >
+                <ReviewCard
+                  review={review}
+                  onImageClick={handleOpenImage}
+                />
+              </div>
+            );
+            })}
             {sortedReviews.length === 0 && (
               <p className="text-sm text-ink-softer">
                 No reviews yet. Be the first to share how Nova X1 fits into your day.
@@ -158,7 +207,12 @@ export default function Reviews() {
             )}
           </div>
 
-          <div className="rounded-xl border border-border-soft bg-white/80 p-4 shadow-sm backdrop-blur">
+          <div
+            className={`rounded-xl border border-border-soft bg-white/80 p-4 shadow-sm backdrop-blur transition-all duration-500 ease-out transform ${
+              hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
+            }`}
+            style={{ transitionDelay: hasEntered ? '200ms' : '0ms' }}
+          >
             <h3 className="text-sm font-semibold text-ink mb-2">
               Add your review
             </h3>
