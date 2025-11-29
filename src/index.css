@@ -24,31 +24,45 @@ body {
 /* --- Animation for Features (Design) Section --- */
 @keyframes slide-in-right {
   from {
-    transform: translateX(24px);
+    transform: translateX(40px) scale(0.96) rotate(2deg);
     opacity: 0;
+    filter: blur(8px);
+  }
+  55% {
+    transform: translateX(-6px) scale(1.04) rotate(-1deg);
+    opacity: 1;
+    filter: blur(0);
   }
   to {
-    transform: translateX(0);
+    transform: translateX(0) scale(1) rotate(0deg);
     opacity: 1;
+    filter: blur(0);
   }
 }
 
 @keyframes slide-out-left {
   from {
-    transform: translateX(0);
+    transform: translateX(0) scale(1) rotate(0deg);
     opacity: 1;
+    filter: blur(0);
+  }
+  45% {
+    transform: translateX(-10px) scale(0.98) rotate(-1.5deg);
+    opacity: 0.9;
+    filter: blur(2px);
   }
   to {
-    transform: translateX(-24px);
+    transform: translateX(-40px) scale(0.94) rotate(-4deg);
     opacity: 0;
+    filter: blur(10px);
   }
 }
 
 .animate-slide-in-right {
-  animation: slide-in-right 1s ease-out forwards;
+  animation: slide-in-right 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .animate-slide-out-left {
-  animation: slide-out-left 1s ease-out forwards;
+  animation: slide-out-left 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 /* ---------------------------------------------- */
