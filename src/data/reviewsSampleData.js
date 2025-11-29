@@ -6,7 +6,7 @@ export const SAMPLE_REVIEWS = [
     rating: 5,
     title: 'Desktop‑level power in my backpack',
     body: 'I replaced a full ATX tower with the Nova X1 and haven’t missed it once. I expected compromises moving to a 4.5L system, but the opposite happened—renders finish faster, games stay smooth, and ML workloads load and run instantly thanks to the 12-core NovaLogic SoC and the insanely fast PCIe 5.0 SSD. The unified LPDDR6X memory keeps big projects responsive, and the performance cores actually hold their 4.9 GHz boost instead of dipping under sustained load. Cooling is shockingly quiet and stable, to the point where I keep checking if the fans are even spinning, and the machine never gets uncomfortably hot. The 16.3" 8K 240 Hz display looks unreal, and I’m consistently getting full-day battery life without babying it. It’s the first compact system I’ve owned that genuinely replaces a desktop.',
-    images: ['/images/Manora_FeaturesPerformance_Scene.webp', '/images/Manora_Display.webp',],
+    images: ['/images/Manora_Review_Sample.png'],
     createdAt: '2025-01-15T10:00:00.000Z',
   },
   {
