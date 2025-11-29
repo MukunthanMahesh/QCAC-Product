@@ -15,7 +15,40 @@
   --color-nav-hover: #111827;                          /* navbar hover on light */
   --font-sans: "Space Grotesk", system-ui, sans-serif; /* Space Grotesk font (default) */
 }
-
+/* Tailwind CSS base styles */
 body {
   @apply bg-page text-ink antialiased;
 }
+
+
+/* --- Animation for Features (Design) Section --- */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-24px);
+    opacity: 0;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 1s ease-out forwards;
+}
+
+.animate-slide-out-left {
+  animation: slide-out-left 1s ease-out forwards;
+}
+/* ---------------------------------------------- */

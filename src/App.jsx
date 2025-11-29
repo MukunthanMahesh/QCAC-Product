@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
-import Features from './components/Features.jsx';
+import FeaturesDesign from './components/FeaturesDesign.jsx';
 import FeaturesPerformance from './components/FeaturesPerformance.jsx';
 
 export default function App() {
@@ -16,11 +16,11 @@ export default function App() {
       {/* Hero Section */}
       <Hero onIntroComplete={() => setHeroIntroDone(true)} />
 
-      {/* Performance / Hardware Features */}
+      {/* Performance Features */}
       <FeaturesPerformance />
 
-      {/* Features Section */}
-      <Features />
+      {/* Design Features */}
+      <FeaturesDesign />
     </div>
   );
 }

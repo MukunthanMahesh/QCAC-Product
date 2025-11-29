@@ -68,10 +68,10 @@ export default function FeaturesPerformance() {
             }`}
           >
             <h2 className="text-3xl sm:text-4xl font-semibold text-accent-dark">
-              Nova X1 is a supercomputer made mini.
+              A supercomputer made mini.
             </h2>
             <p className="text-ink-soft text-base sm:text-lg max-w-xl">
-              Massive compute headroom, high-speed storage, and whisper-quiet cooling, all in 4.5L.
+              Nova X1 has massive compute power, high-speed storage, and whisper-quiet cooling, all in 4.5L.
             </p>
             <p className="text-ink-softer text-sm max-w-xl">
               Comfortably render a 10,000-frame Blender animation, keep a maxed out Cyberpunk 2077 session smooth, and still have room left over to train your next ML model. The numbers speak for themselves.
