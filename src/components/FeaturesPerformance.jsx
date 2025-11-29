@@ -1,36 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { HiCpuChip, HiServerStack, HiComputerDesktop, HiBattery50 } from 'react-icons/hi2';
 
-// The Features (Performance) section of the webpage.
+// performance features section
 export default function FeaturesPerformance() {
-  // Stage 0 = hidden, 1 = image only, 2 = image + copy, 3 = everything including spec list + footer stats.
+  // staged animation state
   const [stage, setStage] = useState(0);
-  // Ref to the whole section so we can observe when it enters the viewport.
+  // section ref for intersection observer
   const sectionRef = useRef(null);
 
-  // Intersection Observer to trigger staged animations when the section enters the viewport.
+  // intersection observer to trigger staged reveal
   useEffect(() => {
     const node = sectionRef.current;
-    // If we've already advanced past stage 0 or ref is missing, skip creating a new observer.
+    // bail if already advanced past stage 0 or no node
     if (!node || stage > 0) return;
 
-    // Observe the section so that once it scrolls into view, we progressively reveal
-    // the hero image, headline/body copy, and spec list with small delays.
+    // observe section and progressively reveal image, text and specs
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // We only want to trigger once, so disconnect the observer immediately.
+            // trigger once then disconnect observer
             observer.disconnect();
 
-            // Timers control the staggered reveal:
-            //  - stage 1: performance image
-            //  - stage 2: heading + paragraph copy
-            //  - stage 3: spec bullet list + footer stats
+            // timers for staggered stages 1 image, 2 text, 3 specs
             const timers = [
-              setTimeout(() => setStage(1), 100), // Manora Laptop Image (Front-Angle)
-              setTimeout(() => setStage(2), 250), // Headllin 'n body text
-              setTimeout(() => setStage(3), 500), // Specs list
+              setTimeout(() => setStage(1), 100), // hero image
+              setTimeout(() => setStage(2), 250), // headline and body
+              setTimeout(() => setStage(3), 500), // specs and footer
             ];
 
             return () => {
@@ -40,7 +36,7 @@ export default function FeaturesPerformance() {
         });
       },
       {
-        // Trigger when roughly 25% of the section is visible,
+        // trigger when roughly 25% of section is visible
         threshold: 0.25,
         rootMargin: '0px 0px -15% 0px',
       },
@@ -61,7 +57,7 @@ export default function FeaturesPerformance() {
         <div className="flex flex-col md:flex-row gap-8 md:gap-10 items-stretch">
           <div className="w-full md:w-1/2 group">
             <div
-              // Performance image slides/fades in first when stage >= 1,
+              // performance image slides and fades in at stage >= 1
               className={`relative h-64 sm:h-80 md:h-[360px] overflow-visible transition-all duration-700 ease-out transform group-hover:-translate-y-2 group-hover:scale-[1.02] ${
                 stage >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
@@ -75,7 +71,7 @@ export default function FeaturesPerformance() {
           </div>
 
           <div
-            // Headline + descriptive copy fade/slide in when stage >= 2.
+            // headline and copy fade and slide in at stage >= 2
             className={`w-full md:w-1/2 flex flex-col justify-center space-y-4 text-center md:text-left transition-all duration-500 ease-out transform ${
               stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
@@ -90,7 +86,7 @@ export default function FeaturesPerformance() {
               Comfortably render a 10,000-frame Blender animation, keep a maxed out Cyberpunk 2077 session smooth, and still have room left over to train your next ML model. The numbers speak for themselves.
             </p>
             <ul
-              // Spec bullet list arrives last in the main block at stage >= 3.
+              // spec list appears last at stage >= 3
               className={`mt-3 space-y-2 text-sm text-ink-soft transition-all duration-500 ease-out transform ${
                 stage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
               }`}
@@ -116,7 +112,7 @@ export default function FeaturesPerformance() {
         </div>
 
         <div
-          // Footer stat grid fades in together with the spec list at stage >= 3
+          // footer stat grid fades in with specs at stage >= 3
           className={`mt-10 border-t border-border-soft/60 md:pt-6 transition-all duration-500 ease-out transform ${
             stage >= 3 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`}

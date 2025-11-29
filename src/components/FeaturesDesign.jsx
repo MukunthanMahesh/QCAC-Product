@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import FeatureCard from './ui/FeatureCard.jsx';
 
-// The Features (Design) section of the webpage.
-// Static configuration for each design feature shown in the list and carousel.
+// design features section and carousel config
 const DESIGN_FEATURES = [
   {
     id: 'colors',
@@ -53,40 +52,40 @@ const DESIGN_FEATURES = [
 ];
 
 export default function Features() {
-  // Default the active feature to the first item
+  // default active feature to first item
   const initialId = DESIGN_FEATURES[0]?.id ?? 'colors';
   const [activeId, setActiveId] = useState(initialId);
-  // Keep track of which feature image to animate out
+  // previous feature id for image animation out
   const [prevId, setPrevId] = useState(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  // Track which color swatch is selected when Colors is active
+  // selected color swatch when colors feature is active
   const [activeColorId, setActiveColorId] = useState(
     DESIGN_FEATURES[0]?.swatches?.[0]?.id ?? 'graphite',
   );
-  // Ref to the whole section so we can observe when it enters the viewport
+  // ref to section for intersection observer
   const sectionRef = useRef(null);
-  // Marks whether the section has entered viewport at least once
+  // has section entered viewport at least once
   const [hasEntered, setHasEntered] = useState(false);
 
-  // Currently displayed feature in the right‑hand carousel
+  // currently displayed feature in carousel
   const activeFeature =
     DESIGN_FEATURES.find((item) => item.id === activeId) ?? DESIGN_FEATURES[0];
 
-    // Flag to hold previous feature for animating out
+    // previous feature for animating out
     const prevFeature =
     prevId != null
       ? DESIGN_FEATURES.find((item) => item.id === prevId) ?? null
       : null;
 
   const handleSetActive = (id) => {
-    // Ignore clicks on already‑active card to avoid retriggering animations.
+    // ignore clicks on already active card
     if (id === activeId) return;
-    // Store current active id so we know which image to animate out.
+    // store current active id for animation
     setPrevId(activeId);
     setActiveId(id);
-    // Toggle animation flag so carousel image plays the in/out keyframes
+    // toggle animation flag for in / out keyframes
     setIsAnimating(true);
-    // After animation window, clear the previous feature so only  active remains
+    // after animation clear previous feature
     setTimeout(() => {
       setPrevId(null);
       setIsAnimating(false);
@@ -95,15 +94,15 @@ export default function Features() {
 
   useEffect(() => {
     const node = sectionRef.current;
-    // If we already triggered the animation once, or ref is missing, do nothing
+    // bail if animation already triggered or no node
     if (!node || hasEntered) return;
 
-    // Observe when the design section scrolls into view 
+    // observe when design section enters viewport
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Flip the flag – cards will animate in based on this boolean
+            // flip flag so cards animate in
             setHasEntered(true);
             observer.disconnect();
           }
@@ -117,7 +116,7 @@ export default function Features() {
 
     observer.observe(node);
 
-    // Clean up observer on unmount.
+    // clean up observer on unmount
     return () => observer.disconnect();
   }, [hasEntered]);
 
@@ -129,7 +128,7 @@ export default function Features() {
     >
       <div className="mx-auto flex w-full max-w-6xl flex-col-reverse gap-10 md:flex-row md:items-center">
 
-        {/* Left: feature list (below image on mobile) */}
+        {/* left column feature list */}
         <div className="w-full md:w-2/5 space-y-10">
           <div>
             <h2 className="mt-2 text-3xl font-semibold sm:text-4xl">
@@ -141,13 +140,13 @@ export default function Features() {
             {DESIGN_FEATURES.map((item, index) => {
               const isActive = item.id === activeFeature.id;
               const isColors = item.id === 'colors';
-              // Only the "colors" feature shows interactive color swatches
+              // only colors feature shows interactive swatches
               const swatches = isColors ? item.swatches ?? [] : [];
 
               return (
                 <div
                   key={item.id}
-                  // Each card fades/slides in when the section becomes visible
+                  // card fade and slide in when section visible
                   className={`w-full transition-all duration-500 ease-out transform ${
                     hasEntered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
                   }`}
@@ -190,9 +189,9 @@ export default function Features() {
           </div>
         </div>
 
-        {/* Right: activeFeature carousel */}
+        {/* right column active feature carousel */}
         <div className="w-full md:w-3/5 flex items-center justify-center group">
-          {/* Image itself is animated when features change + soft hover lift/scale animation */}
+          {/* main image animates on feature change and hover */}
           <div className="relative h-72 w-full max-w-xl overflow-hidden sm:h-80 md:h-[360px] transition-all duration-700 ease-out transform group-hover:-translate-y-2 group-hover:scale-[1.02]">
             {prevFeature && isAnimating && (
               <img

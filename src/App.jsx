@@ -3,6 +3,7 @@ import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
 import FeaturesDesign from './components/FeaturesDesign.jsx';
 import FeaturesPerformance from './components/FeaturesPerformance.jsx';
+import Reviews from './components/Reviews.jsx';
 
 export default function App() {
   // State to track if Hero intro animation is complete
@@ -21,6 +22,9 @@ export default function App() {
 
       {/* Design Features */}
       <FeaturesDesign />
+
+      {/* Reviews */}
+      <Reviews />
     </div>
   );
 }
