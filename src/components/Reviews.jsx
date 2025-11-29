@@ -107,11 +107,11 @@ export default function Reviews() {
     >
       <div className="mx-auto max-w-6xl w-full flex flex-col gap-10">
         <div className="max-w-2xl">
-          <h2 className="mt-2 text-3xl sm:text-4xl font-semibold text-accent-dark">
+          <h2 className="text-3xl sm:text-4xl font-semibold text-accent-dark">
             Trusted by people who push their machines.
           </h2>
           <p className="mt-3 text-sm sm:text-base text-ink-soft">
-            Read what early Nova X1 owners are saying, then share how it holds up in your own workflow. Reviews are stored locally in your browser&mdash;no accounts, no cloud, just your machine.
+            Read what early Nova X1 owners are saying, then share how it holds up in your own workflow. From developers to creators to everyday users, the feedback is consistent. the Nova X1 handles tough tasks easily and makes their old setups feel outdated.
           </p>
         </div>
 

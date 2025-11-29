@@ -188,6 +188,7 @@ export default function ReviewForm({ onSubmit, onImageClick, maxBodyLength }) {
           id="review-image"
           type="file"
           accept="image/*"
+          multiple
           onChange={handleImageChange}
           className="hidden"
         />
