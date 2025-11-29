@@ -82,7 +82,7 @@ export default function Hero({ onIntroComplete }) {
             <Button
               variant="secondary"
               onClick={() => {
-                const el = document.getElementById('features');
+                const el = document.getElementById('features-performance');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
             >

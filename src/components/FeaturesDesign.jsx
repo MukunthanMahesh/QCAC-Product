@@ -122,7 +122,7 @@ export default function Features() {
 
   return (
     <section
-      id="features"
+      id="features-design"
       ref={sectionRef}
       className="px-6 py-20 bg-hero text-white min-h-screen flex items-center"
     >
