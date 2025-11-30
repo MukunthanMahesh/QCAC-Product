@@ -53,13 +53,13 @@ export default function Hero({ onIntroComplete }) {
             <span>Nova&nbsp;X1</span>
           </h1>
           <p
-            className={`text-lg text-ink-soft mb-6 transition-all duration-500 ease-out transform ${
+            className={`text-lg text-ink-softer mb-6 transition-all duration-500 ease-out transform ${
               stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
             }`}
           >
             Manora Nova X1 ignites next-level computing with agile performance, all-day mobility, and a refined design built to drive your ideas, projects, and entertainment the instant they emerge.
           </p>
-          <ul
+          {/* <ul
             className={`hidden md:block text-sm text-ink-softer space-y-1 mb-8 transition-all duration-500 ease-out transform ${
               stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
             }`}
@@ -67,7 +67,7 @@ export default function Hero({ onIntroComplete }) {
             <li>• Pixel‑perfect 8K photon‑emissive display</li>
             <li>• Fanless quantum‑phase cooling at full boost</li>
             <li>• On‑device AI studio for render, grade, and mix</li>
-          </ul>
+          </ul> */}
           <div
             className={`flex flex-col sm:flex-row items-center gap-3 justify-center md:justify-start transition-all duration-500 ease-out transform ${
               stage >= 3

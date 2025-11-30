@@ -37,10 +37,19 @@ export default function FeatureCard({
   const expandedHeight = 164;
   const height = isExpanding || isExpanded ? expandedHeight : collapsedHeight;
 
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      if (onClick) onClick();
+    }
+  };
+
   return (
-    <button
-      type="button"
+    <div
+      role="button"
+      tabIndex={0}
       onClick={onClick}
+      onKeyDown={handleKeyDown}
       className={`${baseClasses} ${stateClasses}`}
       style={{ height }}
     >
@@ -71,6 +80,6 @@ export default function FeatureCard({
           </div>
         )}
       </div>
-    </button>
+    </div>
   );
 }
