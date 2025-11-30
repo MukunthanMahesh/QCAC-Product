@@ -1,4 +1,4 @@
-# Manora – Product Page Experience
+# Manora – Fictional Product Page
 
 ## Live Demo (Temporary Preview hosted on Vercel)
 https://qcac-product.vercel.app
