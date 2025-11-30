@@ -121,13 +121,13 @@ export default function Hero({ onIntroComplete }) {
       <Modal
         isOpen={showPreorderModal}
         onClose={() => setShowPreorderModal(false)}
-        title="Thanks for your enthusiasm"
+        title="Thanks for your enthusiasm!"
         titleId="preorder-dialog-title"
         descriptionId="preorder-dialog-description"
       >
         <p className="text-sm text-ink-soft mb-4">
           We&apos;re glad you&apos;re excited, but this product page
-          is fictional for demo purposes only! :&#40;
+          is fictional for demo purposes only :&#40;
         </p>
         <div className="flex justify-end">
           <Button
