@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { HiShoppingCart, HiArrowDown } from 'react-icons/hi2';
 import Button from './ui/Button.jsx';
+import Modal from './ui/Modal.jsx';
 
 // Hero Component with staged intro animations
 
 export default function Hero({ onIntroComplete }) {
   const [stage, setStage] = useState(0);
+  const [showPreorderModal, setShowPreorderModal] = useState(false);
 
   // Handle staged animations on mount
   useEffect(() => {
@@ -73,7 +75,10 @@ export default function Hero({ onIntroComplete }) {
                 : 'opacity-0 translate-y-3 pointer-events-none'
             }`}
           >
-            <Button>
+            <Button
+              type="button"
+              onClick={() => setShowPreorderModal(true)}
+            >
               <span className="flex items-center gap-2">
                 <HiShoppingCart className="h-4 w-4" />
                 <span>Pre‑order Nova X1</span>
@@ -111,6 +116,30 @@ export default function Hero({ onIntroComplete }) {
           </div>
         </div>
       </div>
+
+      {/* Pre-order Modal */}
+      <Modal
+        isOpen={showPreorderModal}
+        onClose={() => setShowPreorderModal(false)}
+        title="Thanks for your enthusiasm"
+        titleId="preorder-dialog-title"
+        descriptionId="preorder-dialog-description"
+      >
+        <p className="text-sm text-ink-soft mb-4">
+          We&apos;re glad you&apos;re excited, but this product page
+          is fictional for demo purposes only! :&#40;
+        </p>
+        <div className="flex justify-end">
+          <Button
+            type="button"
+            variant="secondaryLight"
+            className="text-xs px-4 py-2"
+            onClick={() => setShowPreorderModal(false)}
+          >
+            Aww man
+          </Button>
+        </div>
+      </Modal>
     </section>
   );
 }
