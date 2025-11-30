@@ -1,5 +1,8 @@
 # Manora – Product Page Experience
 
+## Live Demo (Temporary Preview hosted on Vercel)
+https://qcac-product.vercel.app
+
 ## Description
 A fully responsive, high-performance landing page showcasing the fictional **Manora Nova X1** compact workstation. Built to demonstrate modern frontend practices, clean component structure, and production-ready UI patterns.
 
@@ -37,7 +40,7 @@ Beyond the frontend, this project also ties together:
 - DaVinci Resolve (video editing / export)
 - Canva (graphic elements)
 
-**Outside of software development, 3D modelling is one of my hobbies, so being able to use it for this project was genuinely enjoyable. Credit to Derek Elliott [https://www.youtube.com/@DerekElliott] for the base-modeling tutorial.*
+*Outside of software development, 3D modelling is one of my hobbies, so being able to use it for this project was genuinely enjoyable. Credit to Derek Elliott [https://www.youtube.com/@DerekElliott] for the base-modeling tutorial.*
 
 ## Challenges
 - Integrating Blender-rendered 3D assets cleanly into the frontend.
