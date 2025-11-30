@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 // Fixed navbar with dyanamic styling based on scroll position and smooth scrolling
 
@@ -7,9 +7,32 @@ export default function Navbar() {
   const [theme, setTheme] = useState('dark');
   const [introDone, setIntroDone] = useState(false);
   const [hasMounted, setHasMounted] = useState(false);
+  const sectionMetaRef = useRef([]);
 
-  // Check if we've scrolled past the hero section    
+  // Check if we've scrolled past the hero section + pick navbar theme
   useEffect(() => {
+    const sections = [
+      { id: 'hero', theme: 'dark' },
+      { id: 'features-performance', theme: 'light' },
+      { id: 'features-design', theme: 'dark' },
+      { id: 'reviews', theme: 'light' },
+    ];
+
+    const computeOffsets = () => {
+      const meta = sections
+        .map((section) => {
+          const el = document.getElementById(section.id);
+          if (!el) return null;
+          const rect = el.getBoundingClientRect();
+          const top = rect.top + window.scrollY;
+          return { ...section, top };
+        })
+        .filter(Boolean)
+        .sort((a, b) => a.top - b.top);
+
+      sectionMetaRef.current = meta;
+    };
+
     const handleScroll = () => {
       const hero = document.getElementById('hero');
       if (!hero) {
@@ -19,36 +42,38 @@ export default function Navbar() {
         setIsPastHero(rect.bottom <= 0);
       }
 
-      // Determine section under the navbar to pick theme
-      const sections = [
-        { id: 'hero', theme: 'dark' },
-        { id: 'features-performance', theme: 'light' },
-        { id: 'features', theme: 'dark' },
-        { id: 'reviews', theme: 'light' },
-      ];
+      // Ensure we have section offsets computed
+      if (!sectionMetaRef.current || sectionMetaRef.current.length === 0) {
+        computeOffsets();
+      }
 
-      const probeY = 80; // roughly navbar height from top
-      let nextTheme = theme;
+      // Use scroll position plus + offset so that the section whose top we've scrolled past controls the theme
+      const referenceY = window.scrollY + 40;
 
-      for (const section of sections) {
-        const el = document.getElementById(section.id);
-        if (!el) continue;
-        const rect = el.getBoundingClientRect();
-        if (rect.top <= probeY && rect.bottom >= probeY) {
-          nextTheme = section.theme;
+      let activeTheme = null;
+
+      for (const section of sectionMetaRef.current) {
+        if (referenceY >= section.top) {
+          activeTheme = section.theme;
+        } else {
           break;
         }
       }
 
-      if (nextTheme !== theme) {
-        setTheme(nextTheme);
+      if (activeTheme) {
+        setTheme((prev) => (prev === activeTheme ? prev : activeTheme));
       }
     };
 
+    computeOffsets();
     handleScroll();
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [theme]);
+    window.addEventListener('resize', computeOffsets);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', computeOffsets);
+    };
+  }, []);
 
   // Mark intro as done shortly after mount (used to animate navbar only once)
   useEffect(() => {
