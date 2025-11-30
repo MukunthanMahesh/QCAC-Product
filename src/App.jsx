@@ -4,6 +4,7 @@ import Hero from './components/Hero.jsx';
 import FeaturesDesign from './components/FeaturesDesign.jsx';
 import FeaturesPerformance from './components/FeaturesPerformance.jsx';
 import Reviews from './components/Reviews.jsx';
+import PreorderFab from './components/PreorderFab.jsx';
 import LoadingScreen from './components/ui/LoadingScreen.jsx';
 import useAssetPreloader from './hooks/useAssetPreloader.js';
 import useMinSplashTime from './hooks/useMinSplashTime.js';
@@ -51,6 +52,9 @@ export default function App() {
 
           {/* Reviews */}
           <Reviews />
+
+          {/* Floating pre-order button (minimized in bottom-left) */}
+          <PreorderFab />
         </>
       )}
     </div>

@@ -26,6 +26,21 @@ export default function Hero({ onIntroComplete }) {
     };
   }, []);
 
+  // Allow opening preorder modal via global event
+  useEffect(() => {
+    const handleOpenPreorder = () => setShowPreorderModal(true);
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('preorder:open', handleOpenPreorder);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('preorder:open', handleOpenPreorder);
+      }
+    };
+  }, []);
+
   return (
     <section
       id="hero"
@@ -59,6 +74,7 @@ export default function Hero({ onIntroComplete }) {
           >
             Manora Nova X1 ignites next-level computing with agile performance, all-day mobility, and a refined design built to drive your ideas, projects, and entertainment the instant they emerge.
           </p>
+          {/* Commented out because page looked too crowded. */}
           {/* <ul
             className={`hidden md:block text-sm text-ink-softer space-y-1 mb-8 transition-all duration-500 ease-out transform ${
               stage >= 2 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
